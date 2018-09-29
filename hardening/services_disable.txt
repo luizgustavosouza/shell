@@ -1,0 +1,9 @@
+avahi-daemon
+cups
+nfslock
+rpcgssd
+rpcbind
+rpcidmapd
+rpcsvcgssd
+nfslock
+firewalld
