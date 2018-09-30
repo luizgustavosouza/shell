@@ -8,9 +8,9 @@ NC='\033[0m'       # Text Reset
 touch /var/log/hardening
 echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/hardening_$(hostname)
 
-df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null | xargs -I '{}' chmod a+t '{}'
-echo -e "${IYellow}Configurando Stick Bit nos diretório com permissão de escrita...${NC}" | tee -a /var/log/hardening
 
+echo -e "${IYellow}Configurando Stick Bit nos diretório com permissão de escrita...${NC}" | tee -a /var/log/hardening
+df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null | xargs -I '{}' chmod a+t '{}'
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee tee -a /var/log/hardening
 fi
