@@ -53,4 +53,17 @@ fi
 
 
 #Restringindo daemon at
-echo -e "${IYellow}Configurando os Usuários/Dono de Grupo ${NC}" | tee -a /var/log/hardening_$(hostname)
+rm /etc/cron.deny ; rm /etc/at.deny
+echo -e "${IYellow}Garantindo que cron.deny e at.deny sejam removidos${NC}" | tee -a /var/log/hardening_$(hostname)
+if [[ $? -eq 0 ]]; then
+  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/hardening_$(hostname)
+fi
+echo -e "${IYellow}Configurando as permissões sejam configuradas corretamente${NC}" | tee -a /var/log/hardening_$(hostname)
+chmod og-rwx /etc/{cron.allow,at.allow}
+if [[ $? -eq 0 ]]; then
+  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/hardening_$(hostname)
+fi
+chown root:root /etc/{cron.allow,at.allow}
+if [[ $? -eq 0 ]]; then
+  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/hardening_$(hostname)
+fi
