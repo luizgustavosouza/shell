@@ -51,3 +51,7 @@ if [[ $? -eq 0 ]]; then
 else
   echo -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
 fi
+
+
+echo -e "${IYellow}Travando Contas de Usuários Inativos${NC}" | tee -a /var/log/hardening_$(hostname)
+useradd -D -f 35
