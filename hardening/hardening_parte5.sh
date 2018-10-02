@@ -60,7 +60,7 @@ fi
 
 
 echo -e "${IYellow}Reiniciando o auditd${NC}" | tee -a /var/log/$FILE
-pkill –P 1 –HUP auditd
+pkill -P 1 -HUP auditd
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
