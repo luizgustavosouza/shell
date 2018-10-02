@@ -69,7 +69,7 @@ done
 fi
 
 echo -e "${IYellow}Defina Grupo Padrão para conta root${NC}" | tee -a /var/log/$FILE
-usermod –g 0 root
+usermod -g 0 root
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
