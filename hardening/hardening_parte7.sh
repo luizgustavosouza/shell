@@ -11,11 +11,33 @@ touch /var/log/$FILE
 echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/$FILE
 
 echo -e "${IYellow}Configurando dias para expiração de senha${NC}" | tee -a /var/log/hardening_$(hostname)
-sed 's/PASS_MAX_DAYS   99999"/"PASS_MAX_DAYS   90' /etc/login.defs
+sed -i '/^PASS_MAX_DAYS/ c\PASS_MAX_DAYS   90' /etc/login.defs
+cat /etc/login.defs  | grep "PASS_MAX_DAYS   90"
+if [[ $? -eq 0 ]]; then
+  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
+else
+  echo -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
+fi
 
 
+echo -e "${IYellow}Configurando tamanho mínimo de senha${NC}" | tee -a /var/log/hardening_$(hostname)
+sed -i '/^PASS_MIN_LEN/ c\PASS_MIN_LEN    10' /etc/login.defs
+grep PASS_MIN_LEN /etc/login.defs
+if [[ $? -eq 0 ]]; then
+  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
+else
+  echo -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
+fi
 
 
+echo -e "${IYellow}Configurando número mínimo de dias para trocar as senhas${NC}" | tee -a /var/log/hardening_$(hostname)
+sed -i '/^PASS_MIN_DAYS/ c\PASS_MIN_DAYS    0' /etc/login.defs
+grep PASS_MIN_DAYS /etc/login.defs
+if [[ $? -eq 0 ]]; then
+  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
+else
+  echo -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
+fi
 
 
 echo -e "${IYellow}Desabilitando a conta Root${NC}" | tee -a /var/log/hardening_$(hostname)
@@ -25,6 +47,7 @@ if [[ $? -eq 0 ]]; then
 else
   echo -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
 fi
+
 
 echo -e "${IYellow}Desabilitando contas de Sistema${NC}" | tee -a /var/log/hardening_$(hostname)
 egrep -v "^\+" /etc/passwd | awk -F: '($1!="root" && $1!="sync" && $1!="shutdown" && $1!="halt" && $3<1000 && $7!="/sbin/nologin") {print}'
