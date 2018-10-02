@@ -45,3 +45,8 @@ fi
 
 echo -e "${IYellow}Habilitando Repositório do Rancher...${NC}" | tee -a /var/log/$FILE
 yum-config-manager --enable docker-ce-stable/x86_64
+if [[ $? -eq 0 ]]; then
+  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
+else
+  echo  -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
+fi
