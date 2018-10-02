@@ -43,7 +43,7 @@ done
 
 
 #Desabilitando Serviços Desnecessários
-echo "${IYellow}Desabilitando Serviços${NC}" | tee -a /var/log/$FILE
+echo -e "${IYellow}Desabilitando Serviços${NC}" | tee -a /var/log/$FILE
 for service in $(cat services_disable.txt);do
   if [[ $? -eq 0 ]]; then
     echo -e "${IRed}Serviço $service habilitado${NC}" | tee -a /var/log/$FILE
