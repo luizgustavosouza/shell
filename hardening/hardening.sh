@@ -8,7 +8,7 @@ FILE=/var/log/hardening_$(hostname).log
 #Iniciando Escrita de Relatório
 touch /var/log/$FILE
 
-echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/hardening_$(hostname)
+echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/$FILE
 
 
 #echo -e "${IYellow}Configurando Stick Bit nos diretório com permissão de escrita...${NC}" | tee -a /var/log/$FILE
@@ -43,5 +43,5 @@ else
   echo  -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
 fi
 
-echo -e "${IYellow}Habilitando Repositório do Rancher...${NC}" | tee -a /var/log/hardening
+echo -e "${IYellow}Habilitando Repositório do Rancher...${NC}" | tee -a /var/log/$FILE
 yum-config-manager --enable docker-ce-stable/x86_64
