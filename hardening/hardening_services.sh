@@ -37,7 +37,7 @@ for package in $(cat packages_remove.txt); do
   if [[ $? -eq 1 ]]; then
     echo -e "${IGreen}Pacote Não Instalado${NC}" | tee -a /var/log/$FILE
   else
-    yum remove $package 2>&1 | tee -a /var/log/hardening_$(hostname) ; echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
+    yum remove $package -y 2>&1 | tee -a /var/log/hardening_$(hostname) ; echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
   fi
 done
 
