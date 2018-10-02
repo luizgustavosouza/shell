@@ -45,9 +45,11 @@ done
 #Desabilitando Serviços Desnecessários
 echo -e "${IYellow}Desabilitando Serviços${NC}" | tee -a /var/log/$FILE
 for service in $(cat services_disable.txt);do
+  systemctl is-enabled $service
   if [[ $? -eq 0 ]]; then
     echo -e "${IRed}Serviço $service habilitado${NC}" | tee -a /var/log/$FILE
-  else
-    systemctl disable $service ; echo -e "${IGreen}Serviço $service desabilitado${NC}" | tee -a /var/log/$FILE
+    systemctl disable $service
+  elif [[ $? -eq 1 ]]; then
+    echo -e "${IGreen}Serviço $service desabilitado${NC}" | tee -a /var/log/$FILE
   fi
 done
