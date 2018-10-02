@@ -25,7 +25,7 @@ else
   echo  -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
 fi
 
-echo -e "${IYellow}Desbilitando Repositório do Rancher...${NC}" | tee -a /var/log/$FILE
+echo -e "${IYellow}Desbilitando Repositório do Docker...${NC}" | tee -a /var/log/$FILE
 yum-config-manager --disable docker-ce-stable/x86_64
 
 echo -e "${IYellow}Atualizando S.O${NC}" | tee -a /var/log/$FILE
@@ -43,7 +43,7 @@ else
   echo  -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
 fi
 
-echo -e "${IYellow}Habilitando Repositório do Rancher...${NC}" | tee -a /var/log/$FILE
+echo -e "${IYellow}Habilitando Repositório do Docker...${NC}" | tee -a /var/log/$FILE
 yum-config-manager --enable docker-ce-stable/x86_64
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
