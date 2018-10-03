@@ -32,6 +32,7 @@ fi
 
 #Removendo Pacotes Desnecessários
 echo -e "${IYellow}Removendo Pacotes...${NC}" | tee -a /var/log/$FILE
+cd -
 for package in $(cat packages_remove.txt); do
   rpm -q $package >> /var/log/$FILE
   if [[ $? -eq 1 ]]; then
