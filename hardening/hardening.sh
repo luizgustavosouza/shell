@@ -25,11 +25,9 @@ else
   echo  -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
 fi
 
-echo -e "${IYellow}Desbilitando Repositório do Docker...${NC}" | tee -a /var/log/$FILE
-yum-config-manager --disable docker-ce-stable/x86_64
 
 echo -e "${IYellow}Atualizando S.O${NC}" | tee -a /var/log/$FILE
-yum update -y
+yum -x 'docker-ce*' update -y
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
@@ -37,14 +35,6 @@ else
 fi
 echo -e "${IYellow}Habilitando SElinux no grub${NC}" | tee -a /var/log/$FILE
 sed 's/selinux=0//g' /boot/grub2/grub.cfg
-if [[ $? -eq 0 ]]; then
-  echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
-else
-  echo  -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
-fi
-
-echo -e "${IYellow}Habilitando Repositório do Docker...${NC}" | tee -a /var/log/$FILE
-yum-config-manager --enable docker-ce-stable/x86_64
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
