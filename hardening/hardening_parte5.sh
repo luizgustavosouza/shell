@@ -11,7 +11,7 @@ touch /var/log/$FILE
 echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/$FILE
 
 echo -e "${IYellow}Mantendo informações de auditorias${NC}"
-sed 's/max_log_file_action = ROTATE/max_log_file_action = keep_logs/g' /etc/audit/auditd.conf | tee -a /var/log/$FILE
+sed -i 's/max_log_file_action = ROTATE/max_log_file_action = keep_logs/g' /etc/audit/auditd.conf | tee -a /var/log/$FILE
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
