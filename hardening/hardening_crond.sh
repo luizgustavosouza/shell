@@ -7,10 +7,10 @@ NC='\033[0m'       # Text Reset
 FILE=hardening_$(hostname).log
 
 #Iniciando Escrita de Relatório
-touch /var/log/$FILE
 
 
-echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/$FILE
+
+echo -e "${BBlue}Hardening crond no $(hostname)${NC}"  | tee -a /var/log/$FILE
 
 #Daemon anacron
 echo -e "${IYellow}Instalando anacron...${NC}" | tee -a /var/log/$FILE

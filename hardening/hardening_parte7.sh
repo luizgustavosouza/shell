@@ -6,10 +6,9 @@ BBlue='\033[1;34m'        # Blue
 NC='\033[0m'       # Text Reset
 FILE=hardening_$(hostname).log
 #Iniciando Escrita de Relatório
-touch /var/log/$FILE
 
 
-echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/$FILE
+echo -e "${BBlue}Hardening Usuários e Senhas no $(hostname)${NC}"  | tee -a /var/log/$FILE
 
 echo -e "${IYellow}Configurando dias para expiração de senha${NC}" | tee -a /var/log/$FILE
 sed -i '/^PASS_MAX_DAYS/ c\PASS_MAX_DAYS   90' /etc/login.defs
