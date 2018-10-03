@@ -22,9 +22,7 @@ fi
 
 #X Window
 echo -e "${IYellow}Removendo o 'X Window System'...${NC}" | tee /var/log/$FILE
-cd /etc/system/system/ 
-unlink default.target 
-ln -s /usr/lib/system?system/multi-user.target defaul.target
+cd /etc/system/system/ ; unlink default.target ; ln -s /usr/lib/system?system/multi-user.target defaul.target
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
