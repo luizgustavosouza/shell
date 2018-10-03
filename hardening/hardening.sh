@@ -18,7 +18,7 @@ echo -e "${BBlue}Aplicando hardening no $(hostname)${NC}"  | tee -a /var/log/$FI
 #fi
 
 echo -e "${IYellow}Configurando gpccheck no yum.conf...${NC}" | tee -a /var/log/$FILE
-sed 's/gpgcheck=0/gpgcheck=1/g'  /etc/yum.conf
+sed -i 's/gpgcheck=0/gpgcheck=1/g'  /etc/yum.conf
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
@@ -34,7 +34,7 @@ else
   echo  -e "${IRed}FAIL${NC}" | tee -a /var/log/$FILE
 fi
 echo -e "${IYellow}Habilitando SElinux no grub${NC}" | tee -a /var/log/$FILE
-sed 's/selinux=0//g' /boot/grub2/grub.cfg
+sed -i 's/selinux=0//g' /boot/grub2/grub.cfg
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
