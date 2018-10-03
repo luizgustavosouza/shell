@@ -38,7 +38,7 @@ else
 fi
 
 echo -e "${IYellow}Atualizando configuração do grub${NC}" | tee -a /var/log/$FILE
-grub2-mkconfig –o /boot/grub2/grub.cfg
+grub2-mkconfig -o /boot/grub2/grub.cfg
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else

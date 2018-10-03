@@ -11,7 +11,7 @@ FILE=hardening_$(hostname).log
 echo -e "${BBlue}Hardening Services no $(hostname)${NC}"  | tee -a /var/log/$FILE
 
 #umask
-echo "${IYellow}Configure o daemon 'umask'...${NC}" | tee -a /var/log/$FILE
+echo -e "${IYellow}Configure o daemon 'umask'...${NC}" | tee -a /var/log/$FILE
 echo 'umask 027' > /etc/sysconfig/init | tee -a /var/log/$FILE
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
@@ -21,8 +21,10 @@ fi
 
 
 #X Window
-echo "${IYellow}Removendo o 'X Window System'...${NC}" | tee /var/log/$FILE
-cd /etc/system/system/ ; unlink default.target ; ln –s /usr/lib/system?system/multi-user.target defaul.target
+echo -e "${IYellow}Removendo o 'X Window System'...${NC}" | tee /var/log/$FILE
+cd /etc/system/system/ 
+unlink default.target 
+ln -s /usr/lib/system?system/multi-user.target defaul.target
 if [[ $? -eq 0 ]]; then
   echo -e "${IGreen}SUCESS${NC}" | tee -a /var/log/$FILE
 else
